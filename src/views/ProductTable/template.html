@@ -1,0 +1,358 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Shipment</h1>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Starter Page</li>
+          </ol>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- =======================進貨============================= -->
+        <section class="w-100 section Purchase_Section">
+          <!-- 標題 -->
+          <header class="d-flex justify-content-between">
+            <h1>
+              <font-awesome-icon icon="shopping-cart" />
+              Purchase
+            </h1>
+          </header>
+          <!-- 內容 -->
+          <main class="row text-left" id="Purchase_form">
+            <!-- 產品名稱 -->
+            <b-form-group class="col-12" label="Product Name">
+              <b-input-group>
+                <b-form-input
+                  v-model="order.name"
+                  list="ProductName_list"
+                ></b-form-input>
+                <datalist id="ProductName_list">
+                  <option v-for="name in Product_Options.names"
+                    >{{ name }}</option
+                  >
+                </datalist>
+                <!-- 送出 -->
+                <b-input-group-append>
+                  <b-button @click="submitHandler" variant="primary">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                  </b-button>
+                </b-input-group-append>
+              </b-input-group>
+            </b-form-group>
+
+            <!-- 顏色 -->
+            <!-- <b-form-group class="col-12 col-md-4" label="Color">
+                        <b-form-select
+                          v-model="order.Color"
+                          :options="Product_Options.colors"
+                        ></b-form-select>
+                      </b-form-group> -->
+
+            <!-- 尺寸 -->
+            <!-- <b-form-group class="col-12 col-md-4" label="Size">
+                        <b-form-select
+                          v-model="order.Size"
+                          :options="Product_Options.sizes"
+                        ></b-form-select>
+                      </b-form-group> -->
+
+            <!-- 狀態 -->
+            <b-form-group class="col-12 col-md-4" label="Status">
+              <b-form-select
+                v-model="order.status"
+                :options="Product_Options.status"
+              ></b-form-select>
+            </b-form-group>
+
+            <!-- 數量 -->
+            <b-form-group class="col-12 col-md-4" label="Quantity">
+              <b-form-input
+                type="number"
+                v-model="order.quantity"
+              ></b-form-input>
+            </b-form-group>
+          </main>
+          <!-- {{order.Name}} {{order.Color}} {{order.Size}} {{order.Quantity}} -->
+        </section>
+
+        <!-- =======================庫存============================= -->
+        <section class="w-100 section Stock_Section">
+          <!-- 標題 -->
+          <header class="d-flex justify-content-between">
+            <h1>Stock</h1>
+          </header>
+          <main class="row">
+            <section class="config col-12 col-md-10 mx-auto">
+              <!-- 篩選 -->
+              <div class=" my-1">
+                <b-form-group
+                  label="Filter On"
+                  label-cols-sm="12"
+                  label-cols-md="4"
+                  label-cols-lg="3"
+                  label-align-sm="left"
+                  label-size="sm"
+                  class="mb-0"
+                >
+                  <b-form-checkbox-group v-model="filterOn" class="mt-1">
+                    <b-form-checkbox value="id">ID</b-form-checkbox>
+                    <b-form-checkbox value="memberId">MemberID</b-form-checkbox>
+                    <b-form-checkbox value="name">ProductName</b-form-checkbox>
+                    <b-form-checkbox value="status">Status</b-form-checkbox>
+                  </b-form-checkbox-group>
+                </b-form-group>
+              </div>
+              <div class="row justify-content-between">
+                <!-- 控制顯示數量 -->
+                <b-col class="col-12 col-md-6 my-1">
+                  <b-form-group
+                    label="Per page"
+                    label-cols-sm="6"
+                    label-cols-md="4"
+                    label-cols-lg="3"
+                    label-align-sm="left"
+                    label-size="sm"
+                    label-for="perPageSelect"
+                    class="mb-0"
+                  >
+                    <b-form-select
+                      v-model="perPage"
+                      id="perPageSelect"
+                      size="sm"
+                      :options="pageOptions"
+                    ></b-form-select>
+                  </b-form-group>
+                </b-col>
+                <!-- 搜尋 -->
+                <b-col class="col-12 col-md-6 my-1">
+                  <b-form-group
+                    label="Filter"
+                    label-cols-sm="3"
+                    label-align-sm="right"
+                    label-size="sm"
+                    label-for="filterInput"
+                    class="mb-0"
+                  >
+                    <b-input-group size="sm">
+                      <b-form-input
+                        v-model="filter"
+                        type="search"
+                        id="filterInput"
+                        placeholder="Type to Search"
+                      ></b-form-input>
+                      <b-input-group-append>
+                        <b-button :disabled="!filter" @click="filter = ''"
+                          >Clear</b-button
+                        >
+                      </b-input-group-append>
+                    </b-input-group>
+                  </b-form-group>
+                </b-col>
+              </div>
+            </section>
+
+            <!-- Main table element -->
+            <b-table
+              id="ProductTable"
+              ref="table"
+              selectable
+              responsive="true"
+              :select-mode="selectMode"
+              @row-selected="onRowSelected"
+              @row-clicked="item=>$set(item, '_showDetails', !item._showDetails)"
+              show-empty
+              small
+              striped
+              stacked="md"
+              :items="items"
+              :fields="fields"
+              :current-page="currentPage"
+              :per-page="perPage"
+              :filter="filter"
+              :filterIncludedFields="filterOn"
+              :sort-by.sync="sortBy"
+              :sort-desc.sync="sortDesc"
+              :sort-direction="sortDirection"
+              @filtered="onFiltered"
+              hover
+              bordered
+            >
+              <template v-slot:cell(Action)="row">
+                <!-- 檢視 -->
+                <b-button
+                  size="sm"
+                  @click="info(row.item, row.index, $event.target)"
+                  class="mr-1"
+                >
+                  <i class="fa fa-eye" aria-hidden="true"></i>
+                </b-button>
+                <!-- 編輯 -->
+                <b-button
+                  size="sm"
+                  @click="edit(row.item, row.index, $event.target)"
+                  class="mr-1"
+                >
+                  <i class="fa fa-edit" aria-hidden="true"></i>
+                </b-button>
+                <!-- <b-button size="sm" @click="row.toggleDetails">
+                              {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
+                            </b-button> -->
+                <!-- 刪除 -->
+                <b-button
+                  size="sm"
+                  @click="deleteHandler(row.item.id)"
+                  class="mr-1"
+                >
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </b-button>
+              </template>
+
+              <template v-slot:row-details="row">
+                <!-- <b-card>
+                            <ul>
+                              <li v-for="(value, key) in row.item" :key="key">
+                                {{ key }}: {{ value }}
+                              </li>
+                            </ul>
+                          </b-card> -->
+                <table class="mx-auto col-12">
+                  <thead>
+                    <tr>
+                      <td>Name</td>
+                      <td>Quantity</td>
+                      <td>Price</td>
+                    </tr>
+                  </thead>
+                  <tr>
+                    <td>{{row.item.name}}</td>
+                    <td>{{row.item.quantity}}</td>
+                    <td>{{row.item.unitPrice}}</td>
+                  </tr>
+                </table>
+              </template>
+
+              <template v-slot:cell(selected)="{ rowSelected }">
+                <template v-if="rowSelected">
+                  <span aria-hidden="true">&check;</span>
+                  <span class="sr-only">Selected</span>
+                </template>
+                <template v-else>
+                  <span aria-hidden="true">&nbsp;</span>
+                  <span class="sr-only">Not selected</span>
+                </template>
+              </template>
+            </b-table>
+            <!-- 換頁 -->
+            <b-col sm="12" md="12" class="my-1 mx-auto">
+              <b-pagination
+                v-model="currentPage"
+                :total-rows="totalRows"
+                :per-page="perPage"
+                :align="fill"
+                size="md"
+                class="mx-auto"
+              ></b-pagination>
+            </b-col>
+            <!-- <p>
+                        Selected Rows:<br />
+                        {{ selected }}
+                      </p> -->
+          </main>
+        </section>
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+
+  <!-- ========================Info modal============================= -->
+  <b-modal
+    :id="infoModal.id"
+    :title="infoModal.title"
+    size="lg"
+    @hide="resetInfoModal"
+  >
+    <pre>{{ infoModal.content }}</pre>
+    <!-- ========================按鈕============================= -->
+    <template v-slot:modal-footer>
+      <div class="w-100">
+        <b-button
+          class="mr-3 float-right btn btn-outline-danger btn-light"
+          @click="hideModal('info-modal')"
+        >
+          Close
+        </b-button>
+      </div>
+    </template>
+  </b-modal>
+
+  <!-- ========================edit modal============================= -->
+  <b-modal
+    :id="editModal.id"
+    :title="editModal.title"
+    size="lg"
+    @hide="resetEditModal"
+  >
+    <!-- 內容 -->
+    <main class="row text-left" id="Purchase_form">
+      <!-- 產品名稱 -->
+      <b-form-group class="col-12" label="Product Name">
+        <b-input-group>
+          <b-form-input
+            v-model="EditingItem.name"
+            list="ProductName_list"
+          ></b-form-input>
+          <datalist id="ProductName_list">
+            <option v-for="name in Product_Options.names">{{ name }}</option>
+          </datalist>
+        </b-input-group>
+      </b-form-group>
+
+      <!-- 數量 -->
+      <b-form-group class="col-12" label="Quantity">
+        <b-form-input
+          type="number"
+          v-model="EditingItem.quantity"
+        ></b-form-input>
+      </b-form-group>
+
+      <!-- 狀態 -->
+      <b-form-group class="col-12 col-md-4" label="Status">
+        <b-form-select
+          v-model="EditingItem.status"
+          :options="Product_Options.status"
+        ></b-form-select>
+      </b-form-group>
+    </main>
+    <!-- ========================按鈕============================= -->
+    <template v-slot:modal-footer>
+      <footer class="w-100">
+        <b-button variant="danger" class="float-right " @click="editHandler">
+          Update
+        </b-button>
+        <b-button
+          class="mr-3 float-right btn btn-outline-danger btn-light"
+          @click="hideModal('edit-modal')"
+        >
+          Cancel
+        </b-button>
+      </footer>
+    </template>
+  </b-modal>
+</div>
