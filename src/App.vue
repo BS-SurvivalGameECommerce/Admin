@@ -275,6 +275,12 @@
                     to="/ProductTable"
                   ><i class="far fa-circle nav-icon"></i>ProductTable</router-link>
                 </li>
+                <li class="nav-item">
+                  <router-link
+                    class="nav-link active"
+                    to="/Member"
+                  ><i class="far fa-circle nav-icon"></i>Member</router-link>
+                </li>
 
                 <li class="nav-item">
                   <a
