@@ -1,9 +1,10 @@
+
 <script>
+  import $ from 'jquery'
   export default {
-    name: 'Member',
+    name: 'ZXCCA',
     data() {
       return {
-        item: {},
         fields: [
           {
             key: 'name',
@@ -31,19 +32,15 @@
         }
       }
     },
-    created: function() {
-      $.ajax({
-        url: 'https://localhost:44306/Member/GetMember',
-        type: 'GET',
-        data: '',
-        async: true,
-        success: function(response) {
-          console.log(`${response}`)
-          member._data.item = response.data
-        }
-      })
+    mounted() {
+      // Set the initial number of items
+      // this.totalRows = this.items.length
+      this.$store.dispatch('INIT_MEMBER')
     },
     computed: {
+      item() {
+        return this.$store.state.member
+      },
       sortOptions() {
         // Create an options list from our fields
         return this.fields
@@ -56,6 +53,7 @@
     mounted() {
       // Set the initial number of items
       this.totalRows = this.item.length
+      this.$store.dispatch('INIT_MEMBER')
     },
     methods: {
       info(item, index, button) {
