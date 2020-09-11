@@ -5,7 +5,7 @@ import axios from 'axios'
 Vue.use(Vuex)
 
 const shipment = 'https://localhost:44306/Shipment/GetShipment/'
-
+const memberurl = 'https://localhost:44306/Member/GetMember'
 const IO = {
   post(url: string, data: {}) {
     axios
@@ -57,10 +57,15 @@ export default new Vuex.Store({
         name: 'TOKYO MARUI M4 CQB-R SOPMOD EBB Rifle (Next Gen, Black)',
       },
     ],
+    member: [],
   },
   mutations: {
     SET_STOCK(state, data) {
       state.stock = data
+      console.log('mutation-set', data)
+    },
+    SET_MEMBER(state, data) {
+      state.member = data
       console.log('mutation-set', data)
     },
     ADD_STOCK(state, data) {
@@ -89,6 +94,18 @@ export default new Vuex.Store({
         .then((res) => {
           console.log('get-data-axios', res.data.data)
           context.commit('SET_STOCK', res.data.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+
+    INIT_MEMBER(context) {
+      axios
+        .get(memberurl)
+        .then((res) => {
+          console.log('get-data-axios', res.data.data)
+          context.commit('SET_MEMBER', res.data.data)
         })
         .catch((err) => {
           console.log(err)
