@@ -1,8 +1,7 @@
 
 <script>
-  import $ from 'jquery'
   export default {
-    name: 'ZXCCA',
+    name: 'Member',
     data() {
       return {
         fields: [
@@ -31,11 +30,6 @@
           content: ''
         }
       }
-    },
-    mounted() {
-      // Set the initial number of items
-      // this.totalRows = this.items.length
-      this.$store.dispatch('INIT_MEMBER')
     },
     computed: {
       item() {
