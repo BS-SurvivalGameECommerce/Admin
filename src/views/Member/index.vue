@@ -13,7 +13,13 @@
           },
           { key: 'id', label: 'OrderID', sortable: true, class: 'text-center' },
 
-          { key: 'actions', label: 'Actions' }
+          { key: 'actions', label: 'Actions' },
+          {
+            key: 'status',
+            label: 'Member Status',
+            sortable: true,
+            class: 'text-center'
+          }
         ],
         totalRows: 1,
         currentPage: 10,
