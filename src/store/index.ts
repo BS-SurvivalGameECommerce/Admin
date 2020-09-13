@@ -1,13 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import { data } from 'jquery'
 
 Vue.use(Vuex)
 
 const url = 'https://localhost:44306/'
 const shipment = url + 'Shipment/GetShipment/'
 const memberurl = url + 'Member/GetMember'
-
+const memberpost = url + 'Member/ChangeStatus'
 const IO = {
   post(url: string, data: {}) {
     axios
@@ -143,6 +144,19 @@ export default new Vuex.Store({
         .then((res) => {
           console.log('get-data-axios', res.data.data)
           context.commit('SET_MEMBER', res.data.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    UPDATE_STATUS(context, data) {
+      console.log(`${data}`)
+      axios
+        .post(memberpost, data)
+        .then((res) => {
+          console.log(`${data}`)
+          //console.log('get-data-axios', res.data.data)
+          // context.commit('SET_MEMBER', res.data.data)
         })
         .catch((err) => {
           console.log(err)

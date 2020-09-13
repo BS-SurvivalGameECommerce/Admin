@@ -1,5 +1,6 @@
 
 <script>
+  import { $ } from 'jquery'
   export default {
     name: 'Member',
     data() {
@@ -7,11 +8,11 @@
         fields: [
           {
             key: 'name',
-            label: 'Person Full name',
+            label: 'Member name',
             sortable: true,
             sortDirection: 'desc'
           },
-          { key: 'id', label: 'OrderID', sortable: true, class: 'text-center' },
+          { key: 'id', label: 'MemberID', sortable: true, class: 'text-center' },
 
           { key: 'actions', label: 'Actions' },
           {
@@ -69,6 +70,27 @@
         // Trigger pagination to update the number of buttons/pages due to filtering
         this.totalRows = filteredItems.length
         this.currentPage = 1
+      },
+      modifystatus(event) {
+        console.log('ssssss')
+        console.log(`${event.currentTarget.selectedIndex}`)
+        var sta = event.currentTarget.selectedIndex
+        var ms = JSON.stringify({
+          Id: event.path[3].children[1].innerText,
+          Status: sta
+        })
+        // this.$store.dispatch('UPDATE_STATUS', ms)
+        // console.log(`${ms.Id},${ms.Status}`)
+        $.ajax({
+          type: 'post',
+          url: 'https://localhost:44306/Member/ChangeStatus',
+          data: ms,
+          dataType: 'json',
+          contentType: 'application/json',
+          success: function(response) {
+            console.log('scc', response)
+          }
+        })
       }
     }
   }
