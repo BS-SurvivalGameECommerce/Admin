@@ -1,6 +1,6 @@
 
 <script>
-  import { ajax } from 'jquery'
+  import { $ } from 'jquery'
   export default {
     name: 'Member',
     data() {
@@ -88,7 +88,7 @@
           dataType: 'json',
           contentType: 'application/json',
           success: function(response) {
-            console.log('scc')
+            console.log('scc', response)
           }
         })
       }
