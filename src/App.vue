@@ -271,6 +271,12 @@
                 </li>
                 <li class="nav-item">
                   <router-link
+                    class="nav-link"
+                    to="/Chart"
+                  ><i class="far fa-circle nav-icon"></i>Chart</router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link
                     class="nav-link active"
                     to="/ProductTable"
                   ><i class="far fa-circle nav-icon"></i>ProductTable</router-link>
