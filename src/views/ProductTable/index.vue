@@ -109,11 +109,10 @@
       //table data list
       items() {
         return this.$store.state.stock
+        // return this.$store.getters.getstock
       }
     },
     mounted() {
-      // Set the initial number of items
-      // this.totalRows = this.items.length
       this.$store.dispatch('INIT_STOCK')
     },
     methods: {
@@ -164,14 +163,20 @@
         this.$bvModal.hide(id)
       },
       submitHandler() {
+        // this.$store.dispatch('ADD_STOCK', this.order)
         this.$store.commit('ADD_STOCK', this.order)
         this.Clear_Order()
       },
       editHandler() {
+        // this.$store.dispatch('UPDATE_STOCK', {
+        //   id: this.EditingItem.id,
+        //   data: this.EditingItem
+        // })
         this.$store.commit('UPDATE_STOCK', {
           id: this.EditingItem.id,
           data: this.EditingItem
         })
+
         this.$refs.table.refresh()
         this.Clear_Edit()
         this.hideModal('edit-modal')
@@ -179,6 +184,7 @@
       deleteHandler(id) {
         console.log('delete row.item.id', id)
         this.$store.commit('REMOVE_STOCK', id)
+        // this.$store.dispatch('REMOVE_STOCK', id)
       },
       Clear_Order() {
         this.order = {
