@@ -4,8 +4,10 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-const shipment = 'https://localhost:44306/Shipment/GetShipment/'
-const memberurl = 'https://localhost:44306/Member/GetMember'
+const url = 'https://localhost:44306/'
+const shipment = url + 'Shipment/GetShipment/'
+const memberurl = url + 'Member/GetMember'
+
 const IO = {
   post(url: string, data: {}) {
     axios
@@ -59,6 +61,12 @@ export default new Vuex.Store({
     ],
     member: [],
   },
+  //拿處理過的state - 使用getter
+  getters: {
+    getstock(state) {
+      return state.stock
+    },
+  },
   mutations: {
     SET_STOCK(state, data) {
       state.stock = data
@@ -71,19 +79,16 @@ export default new Vuex.Store({
     ADD_STOCK(state, data) {
       state.stock.push(data)
       console.log('mutation-add', data)
-      IO.post(shipment, data)
     },
     UPDATE_STOCK(state, { id, data }) {
       let index = state.stock.findIndex((x) => x.id == id)
       state.stock[index] = data
       console.log('update - data', index, data)
-      IO.put(shipment + id, data)
     },
     REMOVE_STOCK(state, id) {
       let index = state.stock.findIndex((x) => x.id == id)
       state.stock.splice(index, 1)
       console.log('mutation-delete', index, state.stock[index])
-      IO.delete(shipment + id)
     },
   },
   actions: {
@@ -99,7 +104,39 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-
+    POST_STOCK(context, data) {
+      axios
+        .post(shipment, data)
+        .then((res) => {
+          console.log('post-data-axios', data)
+          context.commit('POST_STOCK', data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    UPDATE_STOCK(context, { id, data }) {
+      axios
+        .put(shipment + id, data)
+        .then((res) => {
+          console.log('put-data-axios', data)
+          context.commit('UPDATE_STOCK', { id, data })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    REMOVE_STOCK(context, id) {
+      axios
+        .delete(url + id)
+        .then((res) => {
+          console.log('delete-data-axios')
+          context.commit('REMOVE_STOCK', id)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     INIT_MEMBER(context) {
       axios
         .get(memberurl)

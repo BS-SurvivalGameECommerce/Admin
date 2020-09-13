@@ -1,6 +1,6 @@
 
 <script>
-  import '../public/dist/css/adminlte.min.css'
+  import '../public/assets/css/adminlte.min.css'
   export default {
     name: 'Layout',
     components: {}
@@ -76,7 +76,7 @@
               <!-- Message Start -->
               <div class="media">
                 <img
-                  src="../public/dist/img/user1-128x128.jpg"
+                  src="../public/assets/img/user1-128x128.jpg"
                   alt="User Avatar"
                   class="img-size-50 mr-3 img-circle"
                 >
@@ -99,7 +99,7 @@
               <!-- Message Start -->
               <div class="media">
                 <img
-                  src="../public/dist/img/user8-128x128.jpg"
+                  src="../public/assets/img/user8-128x128.jpg"
                   alt="User Avatar"
                   class="img-size-50 img-circle mr-3"
                 >
@@ -122,7 +122,7 @@
               <!-- Message Start -->
               <div class="media">
                 <img
-                  src="../public/dist/img/user3-128x128.jpg"
+                  src="../public/assets/img/user3-128x128.jpg"
                   alt="User Avatar"
                   class="img-size-50 img-circle mr-3"
                 >
@@ -208,7 +208,7 @@
         class="brand-link"
       >
         <img
-          src="../public/dist/img/AdminLTELogo.png"
+          src="../public/assets/img/AdminLTELogo.png"
           alt="AdminLTE Logo"
           class="brand-image img-circle elevation-3"
           style="opacity: .8"
@@ -222,7 +222,7 @@
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
             <img
-              src="../public/dist/img/user2-160x160.jpg"
+              src="../public/assets/img/user2-160x160.jpg"
               class="img-circle elevation-2"
               alt="User Image"
             >
