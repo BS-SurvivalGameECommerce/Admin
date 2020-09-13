@@ -277,13 +277,13 @@
                 </li>
                 <li class="nav-item">
                   <router-link
-                    class="nav-link active"
+                    class="nav-link"
                     to="/ProductTable"
                   ><i class="far fa-circle nav-icon"></i>ProductTable</router-link>
                 </li>
                 <li class="nav-item">
                   <router-link
-                    class="nav-link active"
+                    class="nav-link"
                     to="/Member"
                   ><i class="far fa-circle nav-icon"></i>Member</router-link>
                 </li>
@@ -330,7 +330,7 @@
 
 <style lang="scss">
   .content-wrapper {
-    height: 92vh;
+    height: 90vh;
     overflow: auto;
   }
 </style>
