@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import ProductTable from '../views/ProductTable/index.vue'
 import Member from '../views/Member/index.vue'
+import ProductSalesChart from '../views/ProductSalesChart/index.vue'
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,11 @@ const routes = [
     path: '/Member',
     name: 'Member',
     component: Member,
+  },
+  {
+    path: '/ProductSales',
+    name: 'ProductSalesChart',
+    component: ProductSalesChart,
   },
 ]
 

@@ -274,6 +274,12 @@
                     to="/Member"
                   ><i class="far fa-circle nav-icon"></i>Member</router-link>
                 </li>
+                <li class="nav-item">
+                  <router-link
+                    class="nav-link"
+                    to="/ProductSales"
+                  ><i class="far fa-circle nav-icon"></i>ProductSales</router-link>
+                </li>
               </ul>
             </li>
             <li class="nav-item">
