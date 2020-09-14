@@ -1,6 +1,7 @@
 
 <script>
-  import { $ } from 'jquery'
+  // import { $ } from 'jquery'
+  // import { ajax } from 'jquery'
   export default {
     name: 'Member',
     data() {
@@ -79,18 +80,19 @@
           Id: event.path[3].children[1].innerText,
           Status: sta
         })
-        // this.$store.dispatch('UPDATE_STATUS', ms)
+        this.$store.dispatch('UPDATE_STATUS', ms)
         // console.log(`${ms.Id},${ms.Status}`)
-        $.ajax({
-          type: 'post',
-          url: 'https://localhost:44306/Member/ChangeStatus',
-          data: ms,
-          dataType: 'json',
-          contentType: 'application/json',
-          success: function(response) {
-            console.log('scc', response)
-          }
-        })
+
+        // ajax({
+        //   type: 'post',
+        //   url: 'https://localhost:44306/Member/ChangeStatus',
+        //   data: ms,
+        //   dataType: 'json',
+        //   contentType: 'application/json',
+        //   success: function(response) {
+        //     console.log('scc', response)
+        //   }
+        // })
       }
     }
   }

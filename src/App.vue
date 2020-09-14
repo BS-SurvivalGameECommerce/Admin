@@ -1,6 +1,5 @@
 
 <script>
-  import '../public/assets/css/adminlte.min.css'
   export default {
     name: 'Layout',
     components: {}
@@ -266,18 +265,6 @@
                 <li class="nav-item">
                   <router-link
                     class="nav-link"
-                    to="/about"
-                  ><i class="far fa-circle nav-icon"></i>About</router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link
-                    class="nav-link"
-                    to="/Chart"
-                  ><i class="far fa-circle nav-icon"></i>Chart</router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link
-                    class="nav-link"
                     to="/ProductTable"
                   ><i class="far fa-circle nav-icon"></i>ProductTable</router-link>
                 </li>
@@ -286,16 +273,6 @@
                     class="nav-link"
                     to="/Member"
                   ><i class="far fa-circle nav-icon"></i>Member</router-link>
-                </li>
-
-                <li class="nav-item">
-                  <a
-                    href="#"
-                    class="nav-link"
-                  >
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Inactive Page</p>
-                  </a>
                 </li>
               </ul>
             </li>
