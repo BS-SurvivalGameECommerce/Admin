@@ -18,7 +18,14 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="col-10 mx-auto">
+
+    <section class="w-100 section Stock_Section">
+        <header class="d-flex justify-content-between">
+            <h1>
+                <font-awesome-icon icon="shopping-cart" />
+                MemberList
+            </h1>
+        </header>
         <div id="memberlist">
             <!-- <div>
               <b-table striped hover :items="item"></b-table>
@@ -242,15 +249,55 @@
                 <b-modal
                     :id="infoModal.id"
                     :title="infoModal.title"
-                    ok-only
                     @hide="resetInfoModal"
+                    @ok="modifyInfo"
                 >
-                    <pre>{{ infoModal.content }}</pre>
+                    <!-- <div v-for="i in infoModal.content">
+                        <p>1</p>
+                    </div> -->
+                    <div id="modal">
+                        <h3 class="w-100">ID:{{infoModal.content.id}}</h3>
+                        <article class="">
+                            <label>Name:</label><br> <input
+                                type="text"
+                                :Value="infoModal.content.name"
+                                v-model="infoModal.content.name"
+                            ><br>
+                            <label>Mail:</label><br> <input
+                                type="text"
+                                :Value="infoModal.content.mail"
+                                v-model="infoModal.content.mail"
+                            ><br>
+                            <label>PostCode:</label><br> <input
+                                type="text"
+                                :Value="infoModal.content.postCode"
+                                v-model="infoModal.content.postCode"
+                            ><br>
+                            <label>Address:</label><br> <input
+                                type="text"
+                                :Value="infoModal.content.address"
+                                v-model="infoModal.content.address"
+                            ><br>
+
+                            <label>Phone:</label><br> <input
+                                type="text"
+                                :Value="infoModal.content.phone"
+                                v-model="infoModal.content.phone"
+                            ><br>
+                            <label>MemberLevel:</label><br> <input
+                                type="text"
+                                :Value="infoModal.content.memberlevel"
+                                v-model="infoModal.content.memberlevel"
+                            >
+                        </article>
+                    </div>
+
+
                 </b-modal>
 
             </b-container>
         </div>
-    </div>
+    </section>
 
 
 

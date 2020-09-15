@@ -13,14 +13,14 @@
             sortDirection: 'desc'
           },
           { key: 'id', label: 'MemberID', sortable: true, class: 'text-center' },
-
-          { key: 'actions', label: 'Actions' },
           {
             key: 'status',
             label: 'Member Status',
             sortable: true,
             class: 'text-center'
-          }
+          },
+
+          { key: 'actions', label: 'Actions' }
         ],
         totalRows: 1,
         currentPage: 10,
@@ -34,7 +34,7 @@
         infoModal: {
           id: 'info-modal',
           title: '',
-          content: ''
+          content: {}
         }
       }
     },
@@ -59,12 +59,12 @@
     methods: {
       info(item, index, button) {
         this.infoModal.title = `Row index: ${index}`
-        this.infoModal.content = JSON.stringify(item, null, 2)
+        this.infoModal.content = item
         this.$root.$emit('bv::show::modal', this.infoModal.id, button)
       },
       resetInfoModal() {
         this.infoModal.title = ''
-        this.infoModal.content = ''
+        this.infoModal.content = {}
       },
       onFiltered(filteredItems) {
         // Trigger pagination to update the number of buttons/pages due to filtering
@@ -91,8 +91,32 @@
             console.log('scc')
           }
         })
+      },
+      modifyInfo() {
+        let info = this.infoModal.content
+        let data = JSON.stringify({
+          ID: info.id,
+          Name: info.name,
+          Mail: info.mail,
+          PostCode: info.postCode,
+          Address: info.address,
+          Phone: info.phone,
+          MemberLevel: info.memberLevel
+        })
+
+        $.ajax({
+          type: 'post',
+          url: 'https://localhost:44306/Member/ChangeMifo',
+          data: data,
+          dataType: 'json',
+          contentType: 'application/json',
+          success: function(response) {
+            console.log('scc')
+          }
+        })
       }
     }
   }
 </script>
 <template src='./template.html'></template>
+<style src='./style.scss' lang="scss" scoped>

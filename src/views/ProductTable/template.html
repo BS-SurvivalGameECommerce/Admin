@@ -4,7 +4,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Shipment</h1>
+          <h1 class="m-0  text-dark">Shipment</h1>
         </div>
         <!-- /.col -->
         <div class="col-sm-6">
@@ -34,23 +34,33 @@
             </h1>
           </header>
           <!-- 內容 -->
-          <main class="row text-left" id="Purchase_form">
+          <main
+            class="row text-left"
+            id="Purchase_form"
+          >
             <!-- 產品名稱 -->
-            <b-form-group class="col-12" label="Product Name">
+            <b-form-group
+              class="col-12"
+              label="Product Name"
+            >
               <b-input-group>
                 <b-form-input
                   v-model="order.name"
                   list="ProductName_list"
                 ></b-form-input>
                 <datalist id="ProductName_list">
-                  <option v-for="name in Product_Options.names"
-                    >{{ name }}</option
-                  >
+                  <option v-for="name in Product_Options.names">{{ name }}</option>
                 </datalist>
                 <!-- 送出 -->
                 <b-input-group-append>
-                  <b-button @click="submitHandler" variant="primary">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
+                  <b-button
+                    @click="submitHandler"
+                    variant="primary"
+                  >
+                    <i
+                      class="fa fa-plus"
+                      aria-hidden="true"
+                    ></i>
                   </b-button>
                 </b-input-group-append>
               </b-input-group>
@@ -73,7 +83,10 @@
                       </b-form-group> -->
 
             <!-- 狀態 -->
-            <b-form-group class="col-12 col-md-4" label="Status">
+            <b-form-group
+              class="col-12 col-md-4"
+              label="Status"
+            >
               <b-form-select
                 v-model="order.status"
                 :options="Product_Options.status"
@@ -81,7 +94,10 @@
             </b-form-group>
 
             <!-- 數量 -->
-            <b-form-group class="col-12 col-md-4" label="Quantity">
+            <b-form-group
+              class="col-12 col-md-4"
+              label="Quantity"
+            >
               <b-form-input
                 type="number"
                 v-model="order.quantity"
@@ -110,7 +126,10 @@
                   label-size="sm"
                   class="mb-0"
                 >
-                  <b-form-checkbox-group v-model="filterOn" class="mt-1">
+                  <b-form-checkbox-group
+                    v-model="filterOn"
+                    class="mt-1"
+                  >
                     <b-form-checkbox value="id">ID</b-form-checkbox>
                     <b-form-checkbox value="memberId">MemberID</b-form-checkbox>
                     <b-form-checkbox value="name">ProductName</b-form-checkbox>
@@ -157,9 +176,10 @@
                         placeholder="Type to Search"
                       ></b-form-input>
                       <b-input-group-append>
-                        <b-button :disabled="!filter" @click="filter = ''"
-                          >Clear</b-button
-                        >
+                        <b-button
+                          :disabled="!filter"
+                          @click="filter = ''"
+                        >Clear</b-button>
                       </b-input-group-append>
                     </b-input-group>
                   </b-form-group>
@@ -200,7 +220,10 @@
                   @click="info(row.item, row.index, $event.target)"
                   class="mr-1"
                 >
-                  <i class="fa fa-eye" aria-hidden="true"></i>
+                  <i
+                    class="fa fa-eye"
+                    aria-hidden="true"
+                  ></i>
                 </b-button>
                 <!-- 編輯 -->
                 <b-button
@@ -208,7 +231,10 @@
                   @click="edit(row.item, row.index, $event.target)"
                   class="mr-1"
                 >
-                  <i class="fa fa-edit" aria-hidden="true"></i>
+                  <i
+                    class="fa fa-edit"
+                    aria-hidden="true"
+                  ></i>
                 </b-button>
                 <!-- <b-button size="sm" @click="row.toggleDetails">
                               {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
@@ -219,7 +245,10 @@
                   @click="deleteHandler(row.item.id)"
                   class="mr-1"
                 >
-                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  <i
+                    class="fa fa-trash"
+                    aria-hidden="true"
+                  ></i>
                 </b-button>
               </template>
 
@@ -259,7 +288,11 @@
               </template>
             </b-table>
             <!-- 換頁 -->
-            <b-col sm="12" md="12" class="my-1 mx-auto">
+            <b-col
+              sm="12"
+              md="12"
+              class="my-1 mx-auto"
+            >
               <b-pagination
                 v-model="currentPage"
                 :total-rows="totalRows"
@@ -310,9 +343,15 @@
     @hide="resetEditModal"
   >
     <!-- 內容 -->
-    <main class="row text-left" id="Purchase_form">
+    <main
+      class="row text-left"
+      id="Purchase_form"
+    >
       <!-- 產品名稱 -->
-      <b-form-group class="col-12" label="Product Name">
+      <b-form-group
+        class="col-12"
+        label="Product Name"
+      >
         <b-input-group>
           <b-form-input
             v-model="EditingItem.name"
@@ -325,7 +364,10 @@
       </b-form-group>
 
       <!-- 數量 -->
-      <b-form-group class="col-12" label="Quantity">
+      <b-form-group
+        class="col-12"
+        label="Quantity"
+      >
         <b-form-input
           type="number"
           v-model="EditingItem.quantity"
@@ -333,7 +375,10 @@
       </b-form-group>
 
       <!-- 狀態 -->
-      <b-form-group class="col-12 col-md-4" label="Status">
+      <b-form-group
+        class="col-12 col-md-4"
+        label="Status"
+      >
         <b-form-select
           v-model="EditingItem.status"
           :options="Product_Options.status"
@@ -343,7 +388,11 @@
     <!-- ========================按鈕============================= -->
     <template v-slot:modal-footer>
       <footer class="w-100">
-        <b-button variant="danger" class="float-right " @click="editHandler">
+        <b-button
+          variant="danger"
+          class="float-right "
+          @click="editHandler"
+        >
           Update
         </b-button>
         <b-button
