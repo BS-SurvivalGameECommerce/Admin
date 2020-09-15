@@ -13,7 +13,7 @@ const NewOrders = url + 'api/Chart/OrderNowQuantity'
 const ShipmentAmount = url + 'api/Chart/ShipmentAmount'
 const PurchaseAmount = url + 'api/Chart/PurchaseAmount'
 const MemberQuantity = url + 'Member/MemberQuantity'
-
+const WithListQuantity = url+'api/Chart/WithListQuantity'
 
 export default {
     name:'productsale',
@@ -295,11 +295,76 @@ export default {
         .catch((err)=>{
             console.log(err)
         })
+    var withlistjson=[]
+    Axios
+        .get(WithListQuantity)
+        .then((res)=>{
+            withlistjson=res.data.data
+            console.log(withlistjson)
+            let  productname  =[];
+            let totalquantity = [];
+            for(let i=0; i<7;i++){
+                productname.push(withlistjson[i].productName)
+                totalquantity.push(withlistjson[i].totalQuantity)
+            }
+            var withlistdata = {'ChartName1': '產品類別銷售數', 'Name': productname, 'TotalQuantity':totalquantity}
+
+            var withlistChartCanvas = document.getElementById('revenue-withlist-chart-canvas');
+            var withlistChartData = {
+                labels: withlistdata.Name,
+                datasets: [
+                {
+                    label: withlistdata.ChartName1,
+                    backgroundColor: ['#FF88C2','#FFBB66','#FFDD55','#DDFF77','#BBFF66','#66FF66','#77FFCC'],
+                    borderColor: ['#FF88C2','#FFBB66','#FFDD55','#DDFF77','#BBFF66','#66FF66','#77FFCC'],
+                    fill: true,
+                    data: withlistdata.TotalQuantity
+                }]
+            }
+            var withlistChartOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+            legend: {
+                position: 'bottom',
+                labels: {
+                    fontColor: 'black',
+                }
+            },
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        display: false
+                    },
+                    ticks: {
+                        display: false,
+                    }
+                }],
+                yAxes: [{
+                    gridLines: {
+                        display: false
+                    },
+                    position: 'left',
+                    ticks: {
+                        display: false,
+                    }
+                }
+                ]}
+            }
+            new Chart(withlistChartCanvas, {
+                type: 'polarArea',
+                data: withlistChartData,
+                options: withlistChartOptions
+            })
+
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
 
     Axios
         .get(NewOrders)
         .then((res)=>{
-            console.log(`長度:${res.data.data.length}`)
+            // console.log(`長度:${res.data.data.length}`)
             this.NewOrders = res.data.data.length
         })
         .catch((err)=>{
@@ -308,8 +373,16 @@ export default {
     Axios
         .get(ShipmentAmount)
         .then((res)=>{
-            this.ShipmentAmount=res.data.data[0].totalAmount
-            console.log(res.data.data[0].totalAmount)
+            console.log(res.data.data.length)
+            if(res.data.data.length==0){
+                this.ShipmentAmount=0
+            }
+            else{
+                this.ShipmentAmount=res.data.data[0].totalAmount
+            }
+            
+            // console.log(res.data.data[0].totalAmount)
+
         })
         .catch((err)=>{
             console.log(err)
@@ -317,8 +390,14 @@ export default {
     Axios
         .get(PurchaseAmount)
         .then((res)=>{
-            this.PurchaseAmount = res.data.data[0].totalAmount
-            console.log(res.data.data[0].totalAmount)
+            if(res.data.data.length==0){
+                this.PurchaseAmount = 0
+            }
+            else{
+                this.PurchaseAmount = res.data.data[0].totalAmount
+            }
+            
+            // console.log(res.data.data[0].totalAmount)
         })
         .catch((err)=>{
             console.log(err)
@@ -327,7 +406,7 @@ export default {
         .get(MemberQuantity)
         .then((res)=>{
             this.CurrentMember = res.data.data.totalQuantity
-            console.log(res.data.data.totalQuantity)
+            // console.log(res.data.data.totalQuantity)
         })
         .catch((err)=>{
             console.log(err)
