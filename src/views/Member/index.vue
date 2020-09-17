@@ -88,6 +88,7 @@
           dataType: 'json',
           contentType: 'application/json',
           success: function(response) {
+            this.item = response
             console.log('scc')
           }
         })
@@ -95,13 +96,13 @@
       modifyInfo() {
         let info = this.infoModal.content
         let data = JSON.stringify({
-          ID: info.id,
+          Id: info.id,
           Name: info.name,
           Mail: info.mail,
-          PostCode: info.postCode,
+          PostCode: parseInt(info.postCode),
           Address: info.address,
           Phone: info.phone,
-          MemberLevel: info.memberLevel
+          Memberlevel: parseInt(info.memberlevel)
         })
 
         $.ajax({
