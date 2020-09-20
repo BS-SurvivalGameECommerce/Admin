@@ -9,38 +9,6 @@ const url = 'https://localhost:44306/'
 const shipment = url + 'Shipment/GetShipment/'
 const memberurl = url + 'Member/GetMember'
 const memberpost = url + 'Member/ChangeStatus/'
-const IO = {
-  post(url: string, data: {}) {
-    axios
-      .post(url, data)
-      .then((res) => {
-        console.log('post-data-axios', res.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  },
-  put(url: string, data: {}) {
-    axios
-      .put(url, data)
-      .then((res) => {
-        console.log('put-data-axios', res.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  },
-  delete(url: string) {
-    axios
-      .delete(url)
-      .then((res) => {
-        console.log('delete-data-axios')
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  },
-}
 
 export default new Vuex.Store({
   strict: false,
@@ -57,6 +25,18 @@ export default new Vuex.Store({
         paymentMethod: '信用卡',
         quantity: 3,
         unitPrice: 435.0,
+        order: [
+          {
+            color: '',
+            discount: '',
+            mfName: '',
+            orderID: '',
+            price: '',
+            productName: '',
+            quantity: '',
+            unitPrice: '',
+          },
+        ],
         name: 'TOKYO MARUI M4 CQB-R SOPMOD EBB Rifle (Next Gen, Black)',
       },
     ],
@@ -86,6 +66,12 @@ export default new Vuex.Store({
       state.stock[index] = data
       console.log('update - data', index, data)
     },
+    UPDATE_ORDERDETAIL(state, { id, index, data }) {
+      let n = state.stock.findIndex((x) => x.id == id)
+
+      state.stock[n].order[index] = data
+      console.log('update - data', index, data)
+    },
     REMOVE_STOCK(state, id) {
       let index = state.stock.findIndex((x) => x.id == id)
       state.stock.splice(index, 1)
@@ -98,7 +84,7 @@ export default new Vuex.Store({
       axios
         .get(shipment)
         .then((res) => {
-          console.log('get-data-axios', res.data.data)
+          console.log('get-data-axios-stock', res.data.data)
           context.commit('SET_STOCK', res.data.data)
         })
         .catch((err) => {
