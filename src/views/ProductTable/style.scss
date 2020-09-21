@@ -3,7 +3,7 @@
   box-shadow: 0 0.5rem 0.5rem #999;
   border-bottom: 1.5rem solid #444;
   margin-bottom: 2rem;
-  width: 100%;
+  // text-align: left;
 
   header {
     background-color: #eee;
@@ -30,21 +30,8 @@
 .Stock_Section {
   main {
     .config {
+      // background-color: #eee;
       padding-bottom: 0.5rem;
-    }
-    .table {
-      margin-top: 1rem;
-      text-align: center;
-      .subtable {
-        width: 100%;
-        thead {
-          background-color: #000;
-          color: #fff;
-        }
-        thead > tr:hover {
-          color: #fff;
-        }
-      }
     }
   }
 }
