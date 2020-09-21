@@ -1,6 +1,5 @@
 
 <script>
-  import '../public/assets/css/adminlte.min.css'
   export default {
     name: 'Layout',
     components: {}
@@ -250,7 +249,7 @@
                 href="#"
                 class="nav-link active"
               >
-                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <i class="nav-icon fas fa-tachometer-alt mr-3"></i>
                 <p>
                   Starter Pages
                   <i class="right fas fa-angle-left"></i>
@@ -261,41 +260,29 @@
                   <router-link
                     class="nav-link active"
                     to="/"
-                  ><i class="far fa-circle nav-icon"></i>Home</router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link
-                    class="nav-link"
-                    to="/about"
-                  ><i class="far fa-circle nav-icon"></i>About</router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link
-                    class="nav-link"
-                    to="/Chart"
-                  ><i class="far fa-circle nav-icon"></i>Chart</router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link
-                    class="nav-link active"
-                    to="/ProductTable"
-                  ><i class="far fa-circle nav-icon"></i>ProductTable</router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link
-                    class="nav-link active"
-                    to="/Member"
-                  ><i class="far fa-circle nav-icon"></i>Member</router-link>
-                </li>
-
-                <li class="nav-item">
-                  <a
-                    href="#"
-                    class="nav-link"
                   >
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Inactive Page</p>
-                  </a>
+                    <i class="far fa-circle nav-icon mr-3"></i>Home
+                  </router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link
+                    class="nav-link"
+                    to="/ProductTable"
+                  ><i class="far fa-circle nav-icon mr-3"></i>
+                    <span>ProductTable</span>
+                  </router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link
+                    class="nav-link"
+                    to="/Member"
+                  ><i class="far fa-circle nav-icon mr-3"></i>Member</router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link
+                    class="nav-link"
+                    to="/ProductSales"
+                  ><i class="nav-icon far fa-circle mr-3"></i>ProductSales</router-link>
                 </li>
               </ul>
             </li>
@@ -304,7 +291,7 @@
                 href="#"
                 class="nav-link"
               >
-                <i class="nav-icon fas fa-th"></i>
+                <i class="nav-icon fas fa-th mr-3"></i>
                 <p>
                   Simple Link
                   <span class="right badge badge-danger">New</span>
@@ -330,7 +317,7 @@
 
 <style lang="scss">
   .content-wrapper {
-    height: 92vh;
+    height: 90vh;
     overflow: auto;
   }
 </style>
