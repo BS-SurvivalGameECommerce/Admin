@@ -22,10 +22,11 @@
 
           { key: 'actions', label: 'Actions' }
         ],
-        totalRows: 1,
-        currentPage: 10,
-        perPage: 10,
-        pageOptions: [10, 15],
+        fill: 'fill',
+        //totalRows: 3,
+        currentPage: 1,
+        perPage: 5,
+        pageOptions: [5, 10, 15],
         sortBy: '',
         sortDesc: false,
         sortDirection: 'asc',
@@ -73,25 +74,13 @@
       },
       modifystatus(event) {
         console.log('ssssss')
-        console.log(`${event.currentTarget.selectedIndex}`)
         var sta = event.currentTarget.selectedIndex
         var ms = JSON.stringify({
           Id: event.path[3].children[1].innerText,
           Status: sta
         })
-        // this.$store.dispatch('UPDATE_STATUS', ms)
-        // console.log(`${ms.Id},${ms.Status}`)
-        $.ajax({
-          type: 'post',
-          url: 'https://localhost:44306/Member/ChangeStatus',
-          data: ms,
-          dataType: 'json',
-          contentType: 'application/json',
-          success: function(response) {
-            this.item = response
-            console.log('scc')
-          }
-        })
+        this.$store.commit('UPDATE_STATUS', ms)
+        console.log('fffffffff')
       },
       modifyInfo() {
         let info = this.infoModal.content
@@ -104,17 +93,7 @@
           Phone: info.phone,
           Memberlevel: parseInt(info.memberlevel)
         })
-
-        $.ajax({
-          type: 'post',
-          url: 'https://localhost:44306/Member/ChangeMifo',
-          data: data,
-          dataType: 'json',
-          contentType: 'application/json',
-          success: function(response) {
-            console.log('scc')
-          }
-        })
+        this.$store.commit('UPDATE_MEMBERSinfo', data)
       }
     }
   }

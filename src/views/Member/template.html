@@ -30,135 +30,72 @@
             <!-- <div>
               <b-table striped hover :items="item"></b-table>
           </div> -->
-            <b-container fluid>
+            <main class="row">
                 <!-- User Interface controls -->
-                <b-row>
-                    <!-- <b-col
-                        lg="6"
-                        class="my-1"
-                    >
-                        <b-form-group
-                            label="Sort"
-                            label-cols-sm="3"
-                            label-align-sm="right"
-                            label-size="sm"
-                            label-for="sortBySelect"
-                            class="mb-0 disp-none"
-                        >
-                            <b-input-group size="sm">
+                <section class="config col-12 col-md-10 mx-auto">
+                    <!-- 篩選 -->
+                    <div class="my-1">
 
-                                <template v-slot:first>
-                                    <option value="">-- none --</option>
-                                </template>
-                                </b-form-select>
-
-                            </b-input-group>
-                        </b-form-group>
-                    </b-col>
-
-                    <b-col
-                        lg="6"
-                        class="my-1"
-                    >
-                        <b-form-group
-                            label="Initial sort"
-                            label-cols-sm="3"
-                            label-align-sm="right"
-                            label-size="sm"
-                            label-for="initialSortSelect"
-                            class="mb-0"
-                        >
-                            <b-form-select
-                                v-model="sortDirection"
-                                id="initialSortSelect"
-                                size="sm"
-                                :options="['asc', 'desc', 'last']"
-                            ></b-form-select>
-                        </b-form-group>
-                    </b-col> -->
-
-                    <b-col
-                        lg="6"
-                        class="my-1"
-                    >
-                        <b-form-group
-                            label="Filter"
-                            label-cols-sm="3"
-                            label-align-sm="right"
-                            label-size="xl"
-                            label-for="filterInput"
-                            class="mb-0"
-                        >
-                            <b-input-group size="sm">
-                                <b-form-input
-                                    v-model="filter"
-                                    type="search"
-                                    id="filterInput"
-                                    placeholder="Type to Search"
-                                ></b-form-input>
-                                <b-input-group-append>
-                                    <b-button
-                                        :disabled="!filter"
-                                        @click="filter = ''"
-                                    >Clear</b-button>
-                                </b-input-group-append>
-                            </b-input-group>
-                        </b-form-group>
-                    </b-col>
-
-                    <b-col
-                        lg="6"
-                        class="my-1"
-                    >
-                        <!-- <b-form-group
-                            label="Filter On"
-                            label-cols-sm="3"
-                            label-align-sm="right"
-                            label-size="sm"
-                            description="Leave all unchecked to filter on all data"
-                            class="mb-0"
-                        >
-                            <b-form-checkbox-group
-                                v-model="filterOn"
-                                class="mt-1"
+                    </div>
+                    <div class="row justify-content-between">
+                        <!-- 控制顯示數量 -->
+                        <b-col class="col-12 col-md-6 my-1">
+                            <b-form-group
+                                label="Per page"
+                                label-cols-sm="6"
+                                label-cols-md="4"
+                                label-cols-lg="3"
+                                label-align-sm="left"
+                                label-size="sm"
+                                label-for="perPageSelect"
+                                class="mb-0"
                             >
-                                <b-form-checkbox value="name">Name</b-form-checkbox>
-                                <b-form-checkbox value="age">Age</b-form-checkbox>
-
-                            </b-form-checkbox-group>
-                        </b-form-group> -->
-                    </b-col>
-
-                    <b-col
-                        sm="5"
-                        md="6"
-                        class="my-1"
-                    >
-                        <b-form-group
-                            label="Per page"
-                            label-cols-sm="6"
-                            label-cols-md="4"
-                            label-cols-lg="3"
-                            label-align-sm="right"
-                            label-size="m"
-                            label-for="perPageSelect"
-                            class="mb-0"
-                        >
-                            <b-form-select
-                                v-model="perPage"
-                                id="perPageSelect"
-                                size="sm"
-                                :options="pageOptions"
-                            ></b-form-select>
-                        </b-form-group>
-                    </b-col>
-
-
-                </b-row>
+                                <b-form-select
+                                    v-model="perPage"
+                                    id="perPageSelect"
+                                    size="sm"
+                                    :options="pageOptions"
+                                ></b-form-select>
+                            </b-form-group>
+                        </b-col>
+                        <!-- 搜尋 -->
+                        <b-col class="col-12 col-md-6 my-1">
+                            <b-form-group
+                                label="Filter"
+                                label-cols-sm="3"
+                                label-align-sm="right"
+                                label-size="sm"
+                                label-for="filterInput"
+                                class="mb-0"
+                            >
+                                <b-input-group size="sm">
+                                    <b-form-input
+                                        v-model="filter"
+                                        type="search"
+                                        id="filterInput"
+                                        placeholder="Type to Search"
+                                    ></b-form-input>
+                                    <b-input-group-append>
+                                        <b-button
+                                            :disabled="!filter"
+                                            @click="filter = ''"
+                                        >Clear</b-button>
+                                    </b-input-group-append>
+                                </b-input-group>
+                            </b-form-group>
+                        </b-col>
+                    </div>
+                </section>
 
                 <!-- Main table element -->
                 <b-table
-                    class="col-10 mx-auto"
+                    id="ProductTable"
+                    ref="table"
+                    selectable
+                    responsive="true"
+                    :select-mode="selectMode"
+                    @row-selected="onRowSelected"
+                    @row-clicked="item=>$set(item, '_showDetails', !item._showDetails)"
                     show-empty
                     small
                     stacked="md"
@@ -172,6 +109,9 @@
                     :sort-desc.sync="sortDesc"
                     :sort-direction="sortDirection"
                     @filtered="onFiltered"
+                    hover
+                    bordered
+                    class="table"
                 >
                     <template v-slot:cell(name)="row">
                         {{row.item.name}}
@@ -181,16 +121,22 @@
                         <b-button
                             size="sm"
                             @click="info(row.item, row.index, $event.target)"
-                            class="mr-1 btn-danger"
+                            class="mr-1 "
                         >
-                            Modify
+                            <i
+                                class="fa fa-edit"
+                                aria-hidden="true"
+                            ></i>
                         </b-button>
                         <b-button
                             size="sm"
                             @click="row.toggleDetails"
-                            class="btn-danger"
+                            class=""
                         >
-                            {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
+                            <i
+                                class="fa fa-eye"
+                                aria-hidden="true"
+                            ></i>
                         </b-button>
                     </template>
 
@@ -219,144 +165,148 @@
                     </template>
                 </b-table>
                 <b-col
-                    sm="7"
-                    md="6"
-                    class="my-1  mx-auto"
+                    sm="12"
+                    md="12"
+                    class=" mx-auto"
                 >
                     <b-pagination
                         v-model="currentPage"
                         :total-rows="totalRows"
                         :per-page="perPage"
-                        align="fill"
-                        size="sm"
-                        class="my-0"
+                        :align="fill"
+                        size="md"
+                        class="mx-auto"
                     ></b-pagination>
                 </b-col>
 
-                <!-- Info modal -->
-                <b-modal
-                    :id="infoModal.id"
-                    :title="infoModal.title"
-                    @hide="resetInfoModal"
-                    @ok="modifyInfo"
-                >
-                    <!-- <div v-for="i in infoModal.content">
-                        <p>1</p>
-                    </div> -->
-                    <div id="modal">
-                        <h3 class="w-100">ID:{{infoModal.content.id}}</h3>
-                        <article class="">
 
-                            <div class="input-group input-group-lg">
-                                <div class="input-group-prepend">
-                                    <span
-                                        class="input-group-text"
-                                        id="inputGroup-sizing-lg"
-                                    >Name:</span>
-                                </div>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-lg"
-                                    :Value="infoModal.content.name"
-                                    v-model="infoModal.content.name"
-                                >
-                            </div>
-
-                            <div class="input-group input-group-lg">
-                                <div class="input-group-prepend">
-                                    <span
-                                        class="input-group-text"
-                                        id="inputGroup-sizing-lg"
-                                    >Mail:</span>
-                                </div>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-lg"
-                                    :Value="infoModal.content.mail"
-                                    v-model="infoModal.content.mail"
-                                >
-                            </div>
-                            <div class="input-group input-group-lg">
-                                <div class="input-group-prepend">
-                                    <span
-                                        class="input-group-text"
-                                        id="inputGroup-sizing-lg"
-                                    >PostCode:</span>
-                                </div>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-lg"
-                                    :Value="infoModal.content.postCode"
-                                    v-model="infoModal.content.postCode"
-                                >
-                            </div>
-                            <div class="input-group input-group-lg">
-                                <div class="input-group-prepend">
-                                    <span
-                                        class="input-group-text"
-                                        id="inputGroup-sizing-lg"
-                                    >Address:</span>
-                                </div>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-lg"
-                                    :Value="infoModal.content.address"
-                                    v-model="infoModal.content.address"
-                                >
-                            </div>
-                            <div class="input-group input-group-lg">
-                                <div class="input-group-prepend">
-                                    <span
-                                        class="input-group-text"
-                                        id="inputGroup-sizing-lg"
-                                    >Phone:</span>
-                                </div>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-m"
-                                    :Value="infoModal.content.phone"
-                                    v-model="infoModal.content.phone"
-                                >
-                            </div>
-
-                            <div class="input-group input-group-lg">
-                                <div class="input-group-prepend">
-                                    <span
-                                        class="input-group-text"
-                                        id="inputGroup-sizing-m"
-                                    >MemberLevel:</span>
-                                </div>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-lg"
-                                    :Value="infoModal.content.memberlevel"
-                                    v-model="infoModal.content.memberlevel"
-                                >
-                            </div>
-
-                        </article>
-                    </div>
-
-
-                </b-modal>
-
-            </b-container>
+            </main>
         </div>
     </section>
 
 
+    <!-- Info modal -->
+    <b-modal
+        :id="infoModal.id"
+        size="lg"
+        :title="infoModal.title"
+        @hide="resetInfoModal"
+        @ok="modifyInfo"
+    >
+        <!-- <div v-for="i in infoModal.content">
+                        <p>1</p>
+                    </div> -->
+        <main
+            class="row text-left"
+            id="Purchase_form"
+        >
+            <h3 class="w-100">Member ID:{{infoModal.content.id}}</h3>
+            <article class="">
+
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span
+                            class="input-group-text"
+                            id="inputGroup-sizing-lg"
+                        >Name:</span>
+                    </div>
+                    <input
+                        type="text"
+                        class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-lg"
+                        :Value="infoModal.content.name"
+                        v-model="infoModal.content.name"
+                    >
+                </div>
+
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span
+                            class="input-group-text"
+                            id="inputGroup-sizing-lg"
+                        >Mail:</span>
+                    </div>
+                    <input
+                        type="text"
+                        class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-lg"
+                        :Value="infoModal.content.mail"
+                        v-model="infoModal.content.mail"
+                    >
+                </div>
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span
+                            class="input-group-text"
+                            id="inputGroup-sizing-lg"
+                        >PostCode:</span>
+                    </div>
+                    <input
+                        type="text"
+                        class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-lg"
+                        :Value="infoModal.content.postCode"
+                        v-model="infoModal.content.postCode"
+                    >
+                </div>
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span
+                            class="input-group-text"
+                            id="inputGroup-sizing-lg"
+                        >Address:</span>
+                    </div>
+                    <input
+                        type="text"
+                        class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-lg"
+                        :Value="infoModal.content.address"
+                        v-model="infoModal.content.address"
+                    >
+                </div>
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span
+                            class="input-group-text"
+                            id="inputGroup-sizing-lg"
+                        >Phone:</span>
+                    </div>
+                    <input
+                        type="text"
+                        class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-m"
+                        :Value="infoModal.content.phone"
+                        v-model="infoModal.content.phone"
+                    >
+                </div>
+
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span
+                            class="input-group-text"
+                            id="inputGroup-sizing-m"
+                        >MemberLevel:</span>
+                    </div>
+                    <input
+                        type="text"
+                        class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-lg"
+                        :Value="infoModal.content.memberlevel"
+                        v-model="infoModal.content.memberlevel"
+                    >
+                </div>
+
+            </article>
+        </main>
+
+
+    </b-modal>
 
 
 

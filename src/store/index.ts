@@ -9,7 +9,7 @@ const url = 'https://localhost:44306/'
 const shipment = url + 'Shipment/GetShipment/'
 const memberurl = url + 'Member/GetMember'
 const memberpost = url + 'Member/ChangeStatus/'
-
+const membermod = url + 'Member/ChangeMifo/'
 export default new Vuex.Store({
   strict: false,
   state: {
@@ -77,6 +77,37 @@ export default new Vuex.Store({
       state.stock.splice(index, 1)
       console.log('mutation-delete', index, state.stock[index])
     },
+    UPDATE_STATUS(context, data) {
+      console.log(`${data}`)
+
+      axios
+        .post(memberpost, data, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((response) => {
+          console.log('update data', data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    UPDATE_MEMBERSinfo(context, data) {
+      console.log(`${data}`)
+      axios
+        .post(membermod, data, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((response) => {
+          console.log('update data', data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
   },
   actions: {
     // 從api取得資料
@@ -134,21 +165,6 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           console.log(err)
-        })
-    },
-    UPDATE_STATUS(context, data) {
-      console.log(`${data}`)
-      axios
-        .post(memberpost, data, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-        .then((response) => {
-          console.log('update data', data)
-        })
-        .catch((error) => {
-          console.log(error)
         })
     },
   },
