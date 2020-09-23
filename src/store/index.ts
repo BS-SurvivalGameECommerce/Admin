@@ -7,9 +7,9 @@ Vue.use(Vuex)
 
 const url = 'https://localhost:44306/'
 const shipment = url + 'Shipment/GetShipment/'
-const memberurl = url + 'Member/GetMember'
-const memberpost = url + 'Member/ChangeStatus/'
-const membermod = url + 'Member/ChangeMifo/'
+const memberurl = url + 'TZMember/GetMember'
+const memberpost = url + 'TZMember/ChangeStatus/'
+const membermod = url + 'TZMember/ChangeMifo/'
 export default new Vuex.Store({
   strict: false,
   state: {
