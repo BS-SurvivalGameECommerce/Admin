@@ -1,5 +1,6 @@
 
 <script>
+  import { ajax } from 'jquery'
   export default {
     name: 'Member',
     data() {
@@ -7,18 +8,25 @@
         fields: [
           {
             key: 'name',
-            label: 'Person Full name',
+            label: 'Member name',
             sortable: true,
             sortDirection: 'desc'
           },
-          { key: 'id', label: 'OrderID', sortable: true, class: 'text-center' },
+          { key: 'id', label: 'MemberID', sortable: true, class: 'text-center' },
+          {
+            key: 'status',
+            label: 'Member Status',
+            sortable: true,
+            class: 'text-center'
+          },
 
           { key: 'actions', label: 'Actions' }
         ],
-        totalRows: 1,
-        currentPage: 10,
-        perPage: 10,
-        pageOptions: [10, 15],
+        fill: 'fill',
+        //totalRows: 3,
+        currentPage: 1,
+        perPage: 5,
+        pageOptions: [5, 10, 15],
         sortBy: '',
         sortDesc: false,
         sortDirection: 'asc',
@@ -27,7 +35,7 @@
         infoModal: {
           id: 'info-modal',
           title: '',
-          content: ''
+          content: {}
         }
       }
     },
@@ -52,19 +60,43 @@
     methods: {
       info(item, index, button) {
         this.infoModal.title = `Row index: ${index}`
-        this.infoModal.content = JSON.stringify(item, null, 2)
+        this.infoModal.content = item
         this.$root.$emit('bv::show::modal', this.infoModal.id, button)
       },
       resetInfoModal() {
         this.infoModal.title = ''
-        this.infoModal.content = ''
+        this.infoModal.content = {}
       },
       onFiltered(filteredItems) {
         // Trigger pagination to update the number of buttons/pages due to filtering
         this.totalRows = filteredItems.length
         this.currentPage = 1
+      },
+      modifystatus(event) {
+        console.log('ssssss')
+        var sta = event.currentTarget.selectedIndex
+        var ms = JSON.stringify({
+          Id: event.path[3].children[1].innerText,
+          Status: sta
+        })
+        this.$store.commit('UPDATE_STATUS', ms)
+        console.log('fffffffff')
+      },
+      modifyInfo() {
+        let info = this.infoModal.content
+        let data = JSON.stringify({
+          Id: info.id,
+          Name: info.name,
+          Mail: info.mail,
+          PostCode: parseInt(info.postCode),
+          Address: info.address,
+          Phone: info.phone,
+          Memberlevel: parseInt(info.memberlevel)
+        })
+        this.$store.commit('UPDATE_MEMBERSinfo', data)
       }
     }
   }
 </script>
 <template src='./template.html'></template>
+<style src='./style.scss' lang="scss" scoped>

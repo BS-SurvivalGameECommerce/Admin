@@ -1,0 +1,55 @@
+.section {
+  border-radius: 5px;
+  box-shadow: 0 0.5rem 0.5rem #999;
+  border-bottom: 1.5rem solid #444;
+  margin-bottom: 2rem;
+  width: 100%;
+
+  header {
+    background-color: #eee;
+    padding: 1rem;
+    border-radius: inherit;
+    border-top: 0.3rem solid #333;
+    box-shadow: 0 0.3rem 0.5rem #666;
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      display: inline-block;
+      margin: 0;
+    }
+  }
+
+  main {
+    padding: 1.5rem;
+    padding-bottom: 1rem;
+    border-radius: inherit;
+    font-weight: bold;
+  }
+}
+
+.Stock_Section {
+  main {
+    .config {
+      padding-bottom: 0.5rem;
+    }
+
+    .table {
+      margin-top: 1rem;
+      text-align: center;
+
+      .subtable {
+        width: 100%;
+
+        thead {
+          background-color: #000;
+          color: #fff;
+        }
+
+        thead>tr:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
