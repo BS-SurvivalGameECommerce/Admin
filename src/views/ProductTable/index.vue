@@ -233,7 +233,7 @@
       },
       editHandler_OD() {
         console.log('handler', this.editOD.orderid, this.editOD.odindex)
-
+        // console.log(this.editOD)
         this.$store.commit('UPDATE_ORDERDETAIL', {
           id: this.editOD.orderid,
           index: this.editOD.odindex,

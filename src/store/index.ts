@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 const url = 'https://localhost:44306/'
 const shipment = url + 'Shipment/GetShipment/'
+const shipmentInfo = url + 'Shipment/ChangeShipInfo/'
 const memberurl = url + 'TZMember/GetMember'
 const memberpost = url + 'TZMember/ChangeStatus/'
 const membermod = url + 'TZMember/ChangeMifo/'
@@ -64,13 +65,25 @@ export default new Vuex.Store({
     UPDATE_STOCK(state, { id, data }) {
       let index = state.stock.findIndex((x) => x.id == id)
       state.stock[index] = data
-      console.log('update - data', index, data)
+      console.log('update - Stock-data', data)
+      axios
+        .post(shipmentInfo, data, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((response) => {
+          console.log('update data', data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     },
     UPDATE_ORDERDETAIL(state, { id, index, data }) {
       let n = state.stock.findIndex((x) => x.id == id)
 
       state.stock[n].order[index] = data
-      console.log('update - data', index, data)
+      console.log('update - Order-Detail-data', index, data)
     },
     REMOVE_STOCK(state, id) {
       let index = state.stock.findIndex((x) => x.id == id)

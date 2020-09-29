@@ -25,21 +25,21 @@
     <div class="container-fluid">
       <div class="row">
         <!-- =======================進貨============================= -->
-        <section class="section Purchase_Section">
-          <!-- 標題 -->
-          <header class="d-flex justify-content-between">
+        <!-- <section class="section Purchase_Section"> -->
+        <!-- 標題 -->
+        <!-- <header class="d-flex justify-content-between">
             <h1>
               <font-awesome-icon icon="shopping-cart" />
               Add New Order
             </h1>
-          </header>
-          <!-- 內容 -->
-          <main
+          </header> -->
+        <!-- 內容 -->
+        <!-- <main
             class="row text-left"
             id="Purchase_form"
-          >
-            <!-- 產品名稱 -->
-            <b-form-group
+          > -->
+        <!-- 產品名稱 -->
+        <!-- <b-form-group
               class="col-12"
               label="Product Name"
             >
@@ -50,9 +50,9 @@
                 ></b-form-input>
                 <datalist id="ProductName_list">
                   <option v-for="name in Product_Options.names">{{ name }}</option>
-                </datalist>
-                <!-- 送出 -->
-                <b-input-group-append>
+                </datalist> -->
+        <!-- 送出 -->
+        <!-- <b-input-group-append>
                   <b-button
                     @click="submitHandler"
                     variant="primary"
@@ -64,26 +64,26 @@
                   </b-button>
                 </b-input-group-append>
               </b-input-group>
-            </b-form-group>
+            </b-form-group> -->
 
-            <!-- 顏色 -->
-            <!-- <b-form-group class="col-12 col-md-4" label="Color">
+        <!-- 顏色 -->
+        <!-- <b-form-group class="col-12 col-md-4" label="Color">
                         <b-form-select
                           v-model="order.Color"
                           :options="Product_Options.colors"
                         ></b-form-select>
                       </b-form-group> -->
 
-            <!-- 尺寸 -->
-            <!-- <b-form-group class="col-12 col-md-4" label="Size">
+        <!-- 尺寸 -->
+        <!-- <b-form-group class="col-12 col-md-4" label="Size">
                         <b-form-select
                           v-model="order.Size"
                           :options="Product_Options.sizes"
                         ></b-form-select>
                       </b-form-group> -->
 
-            <!-- 狀態 -->
-            <b-form-group
+        <!-- 狀態 -->
+        <!-- <b-form-group
               class="col-12 col-md-4"
               label="Status"
             >
@@ -91,10 +91,10 @@
                 v-model="order.status"
                 :options="Product_Options.status"
               ></b-form-select>
-            </b-form-group>
+            </b-form-group> -->
 
-            <!-- 數量 -->
-            <b-form-group
+        <!-- 數量 -->
+        <!-- <b-form-group
               class="col-12 col-md-4"
               label="Quantity"
             >
@@ -103,9 +103,9 @@
                 v-model="order.quantity"
               ></b-form-input>
             </b-form-group>
-          </main>
-          <!-- {{order.Name}} {{order.Color}} {{order.Size}} {{order.Quantity}} -->
-        </section>
+          </main> -->
+        <!-- {{order.Name}} {{order.Color}} {{order.Size}} {{order.Quantity}} -->
+        <!-- </section> -->
 
         <!-- =======================庫存============================= -->
         <section class="section Stock_Section">
@@ -371,11 +371,8 @@
         <label
           class="text-uppercase col-sm-2 col-form-label bg-light border-right border-bottom text-truncate">{{key}}</label>
         <div class="col-sm-10 border-bottom px-2">
-          <input
-            type="text"
-            class="form-control border-0"
-            v-model="item.value"
-          />
+          <div class="form-control border-0">{{item.value}}
+          </div>
         </div>
       </b-input-group>
 
@@ -494,6 +491,7 @@
       >
         <b-form-input
           type="number"
+          min="0"
           v-model="editOD.orderdetail.quantity"
         ></b-form-input>
       </b-form-group>
