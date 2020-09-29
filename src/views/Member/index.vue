@@ -23,7 +23,8 @@
           { key: 'actions', label: 'Actions' }
         ],
         fill: 'fill',
-        //totalRows: 3,
+        totalRows: 3,
+        selectMode: 'single',
         currentPage: 1,
         perPage: 5,
         pageOptions: [5, 10, 15],
