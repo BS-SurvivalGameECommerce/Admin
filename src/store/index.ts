@@ -82,11 +82,15 @@ export default new Vuex.Store({
     },
     UPDATE_ORDERDETAIL(state, { id, index, data }) {
       let n = state.stock.findIndex((x) => x.id == id)
-
+      let input = {
+        OrderID: data.orderID,
+        Quantity: data.quantity,
+        ProductID: data.productID,
+      }
       state.stock[n].order[index] = data
       console.log('update - Order-Detail-data', index, data)
       axios
-        .post(shipmentOD, data, {
+        .post(shipmentOD, input, {
           headers: {
             'Content-Type': 'application/json',
           },
