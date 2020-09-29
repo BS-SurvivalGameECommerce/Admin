@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import ProductTable from '../views/ProductTable/index.vue'
 import Member from '../views/Member/index.vue'
 import ProductSalesChart from '../views/ProductSalesChart/index.vue'
+import Stock from '../views/Stock/index.vue'
 
 Vue.use(VueRouter)
 
@@ -12,6 +13,10 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+  },{
+    path: '/Stock',
+    name: 'Stock',
+    component: Stock,
   },
   // {
   //   path: '/about',

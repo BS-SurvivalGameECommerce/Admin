@@ -1,0 +1,144 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Stock Page</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Starter Page</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section id="Purchase">
+    <b-button v-b-modal.modal-1>Purchase</b-button>
+    <b-modal id="modal-1" title="Purchase"@ok="Purchaseapi">
+      <b-form-group id="input-group-2" label="Product Name:" label-for="input-2">
+        <b-form-input id="input-2" v-model="ProductName" required placeholder="Enter name"></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-group-2" label="InvetoryQuantity:" label-for="input-2">
+        <b-form-input id="input-2" v-model="InvetoryQuantity" required placeholder="Enter Quantity"></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-group-2" label="Price:" label-for="input-2">
+        <b-form-input id="input-2" v-model="Price" required placeholder="Enter Price"></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-group-2" label="Image:" label-for="input-2">
+        <b-form-file placeholder="Choose a file or drop it here..." drop-placeholder="Drop file here..."
+          @change="showFile"></b-form-file>
+      </b-form-group>
+      <b-form-group id="input-group-2" label="Catagory Name:" label-for="input-2">
+        <select class="form-control" id="exampleFormControlSelect1" v-model="selectedCatagory"
+          v-on:change="catagorychange($event)">
+          <option v-for="item in CatagoryName" :value="item.catagoryName">{{item.catagoryName}}</option>
+        </select>
+        <span>Selected: {{ selectedCatagory }}</span>
+      </b-form-group>
+      <b-form-group id="input-group-2" label="Class Name:" label-for="input-2">
+        <select class="form-control" id="exampleFormControlSelect1" v-model="selectedClass"
+          v-on:change="classchange($event)">
+          <option v-for="item in ClassName">{{item.className}}</option>
+        </select>
+        <span>Selected: {{ selectedClass }}</span>
+      </b-form-group>
+      <b-form-group id="input-group-2" label="Attr:" label-for="input-2">
+        <b-button v-b-modal.modal-2>+</b-button>
+      </b-form-group>
+      <b-form-group id="input-group-2" label="Manufacturer:" label-for="input-2">
+        <select class="form-control" id="exampleFormControlSelect1" v-model="selectedManufacturer"v-on:change="Manufacturerchange($event)">
+          <option v-for="item in ManufacturerName">{{item.manufacturerName}}</option>
+        </select>
+        <span>Selected: {{ selectedManufacturer }}</span>
+      </b-form-group>
+      <div>
+        <b-form-group label="color">
+    
+          <b-form-tags v-model="value" size="lg" add-on-change no-outer-focus class="mb-2">
+            <template v-slot="{ tags, inputAttrs, inputHandlers, disabled, removeTag }">
+              <ul v-if="tags.length > 0" class="list-inline d-inline-block mb-2">
+                <li v-for="tag in tags" :key="tag" class="list-inline-item">
+                  <b-form-tag @remove="removeTag(tag)" :title="tag" :disabled="disabled" variant="info":style="{background:tagcc}">
+                    {{ tag }}
+                  </b-form-tag>
+                </li>
+              </ul>
+              <b-form-select v-bind="inputAttrs" v-on="inputHandlers"
+                :disabled="disabled || availableOptions.length === 0" :options="availableOptions"
+                v-model="selectedcolor" @change="color()">
+                <template v-slot:first>
+       
+                  <option disabled value="">Choose a tag...</option>
+                </template>
+              </b-form-select>
+            </template>
+          </b-form-tags>
+        </b-form-group>
+      </div>
+      <b-form-group class="mb-0" label="Description" label-for="textarea-formatter">
+        <b-form-textarea id="textarea-formatter" v-model="text" placeholder="Enter something..." rows="3" max-rows="6">
+        </b-form-textarea>
+      </b-form-group>
+    </b-modal>
+    <b-modal id="modal-2" @ok="addattr">
+      <b-form-group id="input-group-2" label="Attr:" label-for="input-2">
+        <div class="row">
+          <select class="form-control col-6" id="exampleFormControlSelect1" v-model="selectedAttrName">
+            <option v-for="item in AttrName">{{item}}</option>
+          </select>
+          <b-form-input v-model="selectedAttrvalue" class="form-control col-6"></b-form-input>
+          <!-- <input class="form-control col-6" type="text"> -->
+          <!-- <select class="form-control col-6" id="exampleFormControlSelect1" v-model="selectedAttrvalue">
+            <option v-for="item in Attrvalue">{{item}}</option>
+          </select> -->
+        </div>
+        <span>Selected: {{ AllAttr }}</span>
+
+      </b-form-group>
+    </b-modal>
+  </section>
+
+
+  <div id="Table">
+    <b-container fluid>
+      <b-row>
+        <b-col sm="5" md="6" class="my-1">
+          <b-form-group label="Per page" label-cols-sm="6" label-cols-md="4" label-cols-lg="3" label-align-sm="right"
+            label-size="sm" label-for="perPageSelect" class="mb-0">
+            <b-form-select v-model="perPage" id="perPageSelect" size="sm" :options="pageOptions"></b-form-select>
+          </b-form-group>
+        </b-col>
+        <b-col sm="7" md="6" class="my-1">
+          <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" align="fill" size="sm"
+            class="my-0"></b-pagination>
+        </b-col>
+      </b-row>
+      <b-table striped hover :items="items" :per-page="perPage" :current-page="currentPage">
+        <template v-slot:cell(img)="row">
+          <img :src="row.value" alt="" class="table-img">
+          <!-- 111 -->
+        </template>
+        <template v-slot:cell(attrlist)="row">
+          <b-button size="sm" @click="info(row.value, row.index, $event.target)" class="mr-1">
+            Info modal
+          </b-button>
+        </template>
+      </b-table>
+
+      <!-- Info modal -->
+      <b-modal :id="infoModal.id" :title="infoModal.title" ok-only @hide="resetInfoModal">
+        <pre>{{ infoModal.content }}</pre>
+      </b-modal>
+
+    </b-container>
+  </div>
+
+
+
+</div>
