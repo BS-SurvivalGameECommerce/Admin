@@ -289,18 +289,7 @@
                 to="/Member"
               ><i class="fas fa-user-friends mr-3 nav-icon"></i>Member</router-link>
             </li>
-            <li class="nav-item">
-              <a
-                href="#"
-                class="nav-link"
-              >
-                <i class="nav-icon fas fa-th mr-3"></i>
-                <p>
-                  Simple Link
-                  <span class="right badge badge-danger">New</span>
-                </p>
-              </a>
-            </li>
+
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
