@@ -5,7 +5,7 @@
   import Chart from 'chart.js'
   // import '../../assets/chartjs/productchart.js'
   // import '../../assets/chartjs/productclasschart.js'
-  const url = 'https://localhost:5001/'
+  const url = 'http://sgwebapi-core.azurewebsites.net'
   const SalesQuantity = url + 'api/Chart/SalesQuantity'
   const MonthlyTransactions = url + 'api/Chart/MonthlyTransactions'
   const ClassSalesQuantity = url + 'api/Chart/ClassSalesQuantity'
