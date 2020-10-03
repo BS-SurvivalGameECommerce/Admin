@@ -8,11 +8,11 @@ import ProductSalesChart from '../views/ProductSalesChart/index.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home,
-  },
+  // {
+  //   path: '/',
+  //   name: 'Home',
+  //   component: Home,
+  // },
   // {
   //   path: '/about',
   //   name: 'About',
@@ -33,7 +33,7 @@ const routes = [
     component: Member,
   },
   {
-    path: '/ProductSales',
+    path: '/',
     name: 'ProductSalesChart',
     component: ProductSalesChart,
   },

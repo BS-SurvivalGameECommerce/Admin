@@ -245,46 +245,41 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item has-treeview menu-open">
-              <a
-                href="#"
+
+              <router-link
                 class="nav-link active"
+                to="/"
               >
-                <i class="nav-icon fas fa-tachometer-alt mr-3"></i>
-                <p>
-                  Starter Pages
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
+                <i class="fas fa-tachometer-alt mr-3  nav-icon"></i>
+                <p>DashBoard
+                  <i class="right fas fa-angle-left"></i></p>
+              </router-link>
+
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <router-link
-                    class="nav-link active"
-                    to="/"
-                  >
-                    <i class="far fa-circle nav-icon mr-3"></i>Home
+                    class="nav-link"
+                    to="/STOCK PAGE"
+                  ><i class="fas fa-boxes mr-3 nav-icon"></i>
+                    <span>STOCK PAGE</span>
                   </router-link>
                 </li>
-                <li class="nav-item">
-                  <router-link
-                    class="nav-link"
-                    to="/ProductTable"
-                  ><i class="far fa-circle nav-icon mr-3"></i>
-                    <span>ProductTable</span>
-                  </router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link
-                    class="nav-link"
-                    to="/Member"
-                  ><i class="far fa-circle nav-icon mr-3"></i>Member</router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link
-                    class="nav-link"
-                    to="/ProductSales"
-                  ><i class="nav-icon far fa-circle mr-3"></i>ProductSales</router-link>
-                </li>
+
               </ul>
+            </li>
+            <li class="nav-item">
+              <router-link
+                class="nav-link"
+                to="/ProductTable"
+              ><i class="fas fa-boxes mr-3 nav-icon"></i>
+                <span>ProductTable</span>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link
+                class="nav-link"
+                to="/Member"
+              ><i class="fas fa-user-friends mr-3 nav-icon"></i>Member</router-link>
             </li>
             <li class="nav-item">
               <a
