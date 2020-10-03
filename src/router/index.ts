@@ -9,13 +9,6 @@ import Stock from '../views/Stock/index.vue'
 Vue.use(VueRouter)
 
 const routes = [
-<<<<<<< HEAD
-  // {
-  //   path: '/',
-  //   name: 'Home',
-  //   component: Home,
-  // },
-=======
   {
     path: '/',
     name: 'Home',
@@ -25,7 +18,6 @@ const routes = [
     name: 'Stock',
     component: Stock,
   },
->>>>>>> 9551061be44b6b4adfc3c135af7afaf31d34d00c
   // {
   //   path: '/about',
   //   name: 'About',
