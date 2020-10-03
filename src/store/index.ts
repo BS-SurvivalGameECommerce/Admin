@@ -12,9 +12,11 @@ const shipmentOD = url + 'Shipment/ModifyOD/'
 const memberurl = url + 'TZMember/GetMember'
 const memberpost = url + 'TZMember/ChangeStatus/'
 const membermod = url + 'TZMember/ChangeMifo/'
+
 export default new Vuex.Store({
   strict: false,
   state: {
+    url:url,
     stock: [
       {
         id: 'OR001',
@@ -197,6 +199,7 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    
   },
   modules: {},
 })
