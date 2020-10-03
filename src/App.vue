@@ -259,13 +259,21 @@
                 <li class="nav-item">
                   <router-link
                     class="nav-link"
-                    to="/Stock"
-                  ><i class="fas fa-warehouse"></i>
-                    <span>STOCK PAGE</span>
+                    to="/"
+                  ><i class="fas fa-dollar-sign mr-3  nav-icon"></i>
+                    <span>Product Sale</span>
                   </router-link>
                 </li>
 
               </ul>
+            </li>
+            <li class="nav-item">
+              <router-link
+                class="nav-link"
+                to="/Stock"
+              ><i class="fas fa-warehouse mr-3 nav-icon"></i>
+                <span>STOCK PAGE</span>
+              </router-link>
             </li>
             <li class="nav-item">
               <router-link

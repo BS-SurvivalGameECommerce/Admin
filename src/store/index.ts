@@ -5,7 +5,7 @@ import { data } from 'jquery'
 
 Vue.use(Vuex)
 
-const url = 'https://localhost:44306/'
+const url = 'https://localhost:5001/'
 const shipment = url + 'Shipment/GetShipment/'
 const shipmentInfo = url + 'Shipment/ChangeShipInfo/'
 const shipmentOD = url + 'Shipment/ModifyOD/'
@@ -16,7 +16,7 @@ const membermod = url + 'TZMember/ChangeMifo/'
 export default new Vuex.Store({
   strict: false,
   state: {
-    url:url,
+    url: url,
     stock: [
       {
         id: 'OR001',
@@ -199,7 +199,6 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-    
   },
   modules: {},
 })
