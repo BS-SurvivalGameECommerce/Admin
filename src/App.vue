@@ -259,8 +259,8 @@
                 <li class="nav-item">
                   <router-link
                     class="nav-link"
-                    to="/STOCK PAGE"
-                  ><i class="fas fa-boxes mr-3 nav-icon"></i>
+                    to="/Stock"
+                  ><i class="fas fa-warehouse"></i>
                     <span>STOCK PAGE</span>
                   </router-link>
                 </li>
