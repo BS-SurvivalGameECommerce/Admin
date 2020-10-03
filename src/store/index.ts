@@ -5,7 +5,7 @@ import { data } from 'jquery'
 
 Vue.use(Vuex)
 
-const url = 'http://sgwebapi-core.azurewebsites.net'
+const url = 'http://sgwebapi-core.azurewebsites.net/'
 const shipment = url + 'Shipment/GetShipment/'
 const shipmentInfo = url + 'Shipment/ChangeShipInfo/'
 const shipmentOD = url + 'Shipment/ModifyOD/'
